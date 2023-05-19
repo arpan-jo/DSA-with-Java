@@ -1,8 +1,13 @@
+import java.util.Arrays;
+import java.util.Collections;
+
 public class SortingAlgo {
 
-    // bubble sort, selection sort, insertion sort ===> O(n2)
+    // bubble sort, selection sort, insertion sort time complexity ===> O(n2)
     // bobble sort ===> incresing order
     // selection sort ===> decreasing order
+
+    // inbuil sort method time complexity O(n logn)
 
     public static void bublleSort(int arr[]) {
         for (int turn = 0; turn < arr.length - 1; turn++) {
@@ -22,7 +27,7 @@ public class SortingAlgo {
 
     public static void selectionSort(int arr[]) {
 
-        for (int i = 1; i < arr.length - 1; i++) {
+        for (int i = 0; i < arr.length - 1; i++) {
             int minPosition = i;
             for (int j = i + 1; j < arr.length; j++) {
                 if (arr[minPosition] < arr[j]) {
@@ -51,7 +56,27 @@ public class SortingAlgo {
             // insertion
             arr[previous + 1] = current;
         }
+    }
 
+    public static void countingSort(int arr[]) {
+        int largest = Integer.MIN_VALUE;
+        for (int i = 0; i < arr.length; i++) {
+            largest = Math.max(largest, arr[i]);
+        }
+
+        int count[] = new int[largest + 1];
+        for (int i = 0; i < arr.length; i++) {
+            count[arr[i]]++;
+        }
+
+        int j = 0;
+        for (int i = 0; i < count.length; i++) {
+            while (count[i] > 0) {
+                arr[j] = i;
+                j++;
+                count[i]--;
+            }
+        }
     }
 
     public static void printArr(int arr[]) {
@@ -62,10 +87,12 @@ public class SortingAlgo {
     }
 
     public static void main(String[] args) {
-        int arr[] = { 5, 3, 4, 1, 2 };
+        int arr[] = { 3, 6, 2, 1, 8, 7, 4, 5, 3, 1 };
         // bublleSort(arr);
         // selectionSort(arr);
-        insertionSort(arr);
+        // insertionSort(arr);
+        countingSort(arr);
+        // Arrays.sort(arr);
         printArr(arr);
     }
 }
